@@ -2,6 +2,7 @@ package services
 
 import (
 	"context"
+	"fmt"
 	"net/http"
 
 	"github.com/hellokvn/go-grpc-product-svc/pkg/db"
@@ -15,6 +16,7 @@ type Server struct {
 }
 
 func (s *Server) CreateProduct(ctx context.Context, req *pb.CreateProductRequest) (*pb.CreateProductResponse, error) {
+	fmt.Println("RPC product-service/CreateProduct")
 	var product models.Product
 
 	product.Name = req.Name
@@ -35,6 +37,8 @@ func (s *Server) CreateProduct(ctx context.Context, req *pb.CreateProductRequest
 }
 
 func (s *Server) FindOne(ctx context.Context, req *pb.FindOneRequest) (*pb.FindOneResponse, error) {
+	fmt.Println("RPC product-service/FindOne")
+
 	var product models.Product
 
 	if result := s.H.DB.First(&product, req.Id); result.Error != nil {

@@ -1,8 +1,9 @@
 syntax = "proto3";
 
-package product;
+option go_package = "github.com/ErwinSalas/go-grpc-product-svc/pkg/proto;productpb";
 
-option go_package = "./pkg/pb";
+package proto;
+
 
 service ProductService {
   rpc CreateProduct(CreateProductRequest) returns (CreateProductResponse) {}

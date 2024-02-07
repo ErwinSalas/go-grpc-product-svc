@@ -5,11 +5,13 @@ import (
 	"log"
 	"net"
 
-	"github.com/hellokvn/go-grpc-product-svc/pkg/config"
-	"github.com/hellokvn/go-grpc-product-svc/pkg/db"
-	pb "github.com/hellokvn/go-grpc-product-svc/pkg/pb"
-	services "github.com/hellokvn/go-grpc-product-svc/pkg/services"
+	"github.com/ErwinSalas/go-grpc-product-svc/pkg/config"
+	"github.com/ErwinSalas/go-grpc-product-svc/pkg/database"
+	"github.com/ErwinSalas/go-grpc-product-svc/pkg/product"
+	productpb "github.com/ErwinSalas/go-grpc-product-svc/pkg/proto"
+	"github.com/ErwinSalas/go-grpc-product-svc/pkg/server"
 	"google.golang.org/grpc"
+	"google.golang.org/grpc/reflection"
 )
 
 func main() {
@@ -19,9 +21,9 @@ func main() {
 		log.Fatalln("Failed at config", err)
 	}
 
-	h := db.Init(c.DBUrl)
+	database := database.Init(c.DBUrl)
 
-	lis, err := net.Listen("tcp", c.Port)
+	listen, err := net.Listen("tcp", c.Port)
 
 	if err != nil {
 		log.Fatalln("Failed to listing:", err)
@@ -29,15 +31,14 @@ func main() {
 
 	fmt.Println("Product Svc on", c.Port)
 
-	s := services.Server{
-		H: h,
-	}
-
 	grpcServer := grpc.NewServer()
+	productService := product.NewProductService(product.NewGormProductRepository(database.DB)) // Puedes pasar una conexión de base de datos real aquí.
+	productpb.RegisterProductServiceServer(grpcServer, server.NewServer(productService))
 
-	pb.RegisterProductServiceServer(grpcServer, &s)
+	// Register reflection service on gRPC server.
+	reflection.Register(grpcServer)
 
-	if err := grpcServer.Serve(lis); err != nil {
-		log.Fatalln("Failed to serve:", err)
+	if err := grpcServer.Serve(listen); err != nil {
+		log.Fatalf("Failed to serve: %v", err)
 	}
 }

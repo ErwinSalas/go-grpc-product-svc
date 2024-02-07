@@ -4,7 +4,7 @@ import (
 	"net/http"
 
 	"github.com/ErwinSalas/go-grpc-product-svc/pkg/models"
-	productpb "github.com/ErwinSalas/go-grpc-product-svc/pkg/proto"
+	productpb "github.com/ErwinSalas/go-grpc-product-svc/proto"
 )
 
 type ProductService struct {

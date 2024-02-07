@@ -2,10 +2,10 @@ module github.com/ErwinSalas/go-grpc-product-svc
 
 go 1.21.4
 
-replace github.com/ErwinSalas/go-grpc-product-svc/pkg/proto => ./pkg/proto
+replace github.com/ErwinSalas/go-grpc-product-svc/proto => ./proto
 
 require (
-	github.com/ErwinSalas/go-grpc-product-svc/pkg/proto v0.0.0-00010101000000-000000000000
+	github.com/ErwinSalas/go-grpc-product-svc/proto v0.0.0-00010101000000-000000000000
 	github.com/spf13/viper v1.18.2
 	google.golang.org/grpc v1.61.0
 	gorm.io/driver/postgres v1.5.6

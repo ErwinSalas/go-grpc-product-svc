@@ -8,8 +8,8 @@ import (
 	"github.com/ErwinSalas/go-grpc-product-svc/pkg/config"
 	"github.com/ErwinSalas/go-grpc-product-svc/pkg/database"
 	"github.com/ErwinSalas/go-grpc-product-svc/pkg/product"
-	productpb "github.com/ErwinSalas/go-grpc-product-svc/pkg/proto"
 	"github.com/ErwinSalas/go-grpc-product-svc/pkg/server"
+	productpb "github.com/ErwinSalas/go-grpc-product-svc/proto"
 	"google.golang.org/grpc"
 	"google.golang.org/grpc/reflection"
 )

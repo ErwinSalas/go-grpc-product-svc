@@ -1,4 +1,4 @@
-module github.com/ErwinSalas/go-grpc-product-svc/pkg/proto
+module github.com/ErwinSalas/go-grpc-product-svc/proto
 
 go 1.21.4
 

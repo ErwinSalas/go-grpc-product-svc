@@ -4,7 +4,7 @@ import (
 	"context"
 
 	"github.com/ErwinSalas/go-grpc-product-svc/pkg/product"
-	productpb "github.com/ErwinSalas/go-grpc-product-svc/pkg/proto"
+	productpb "github.com/ErwinSalas/go-grpc-product-svc/proto"
 )
 
 type Server struct {

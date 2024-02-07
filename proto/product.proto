@@ -1,6 +1,6 @@
 syntax = "proto3";
 
-option go_package = "github.com/ErwinSalas/go-grpc-product-svc/pkg/proto;productpb";
+option go_package = "github.com/ErwinSalas/go-grpc-product-svc/proto;productpb";
 
 package proto;
 

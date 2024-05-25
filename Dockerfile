@@ -31,9 +31,15 @@ WORKDIR /root/
 COPY --from=builder /app-product/main .
 COPY --from=builder /app-product/.env .
 
+# Install grpcurl
+RUN apk --no-cache add curl
+RUN wget -qO- https://github.com/fullstorydev/grpcurl/releases/download/v1.8.0/grpcurl_1.8.0_linux_x86_64.tar.gz | tar xvz -C /tmp && \
+    mv /tmp/grpcurl /usr/local/bin/ && \
+    rm -rf /tmp/grpcurl
+
 
 # Expose port 50053 to the outside world
-EXPOSE 50053
+EXPOSE 50052
 
 #Command to run the executable
 CMD ["./main"]
